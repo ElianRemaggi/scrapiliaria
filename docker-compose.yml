@@ -1,16 +1,18 @@
-version: "3.8"
 
 services:
   n8n:
-    image: docker.n8n.io/n8nio/n8n
+    image: n8nio/n8n:latest
     container_name: n8n
     ports:
       - "5678:5678"
     environment:
-      - GENERIC_TIMEZONE=America/Argentina/Buenos_Aires
-      - TZ=America/Argentina/Buenos_Aires
+      - N8N_COMMUNITY_NODES_ENABLED=true
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+      - N8N_ENABLE_CREDENTIALS_OVERRIDES=true
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
       - N8N_RUNNERS_ENABLED=true
+      - GENERIC_TIMEZONE=America/Argentina/Buenos_Aires
+      - TZ=America/Argentina/Buenos_Aires
     volumes:
       - n8n_data:/home/node/.n8n
 

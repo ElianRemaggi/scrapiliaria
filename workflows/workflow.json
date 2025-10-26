@@ -105,5 +105,6 @@
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "2395d18ea6cca1f414369f37a55b1d2e41d6bac4be31fac5e69f1637ae78b9b7"
-  }
+  },
+  "name": "workflow1"
 }
