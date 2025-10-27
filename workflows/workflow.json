@@ -1,14 +1,15 @@
 {
+  "name": "My workflow",
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -608,
-        48
+        -1744,
+        16
       ],
-      "id": "0c981307-1776-4da6-96ce-d2bae6586b81",
+      "id": "366e53ed-9ed1-4520-9e14-1f848325d098",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -18,10 +19,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -208,
+        0,
         -176
       ],
-      "id": "6d5f8f65-fd5d-4b2c-be9e-717355a8e3d6",
+      "id": "33da4120-5f39-4a8f-bad7-57c937686cc5",
       "name": "Code in JavaScript"
     },
     {
@@ -32,28 +33,28 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -480,
-        -368
+        -96,
+        -416
       ],
-      "id": "cab292f1-5eaa-46f5-b335-c11e004216dd",
+      "id": "5900ae62-c487-450a-98e6-3fc66b208a8c",
       "name": "Sticky Note"
     },
     {
       "parameters": {
-        "websiteUrl": "https://www.zonaprop.com.ar/departamentos-venta-q-mar-del-plata.html",
-        "userPrompt": "Extract all the aparment listed, i need a json with the main pic link, the title, descriptions, all the information like amb dorm baño coch , the addres, and the link to redirect to the website"
+        "websiteUrl": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-oportunidad!-4-ambientes-con-cochera-apto-credito-56666526.html",
+        "userPrompt": "Extract the following information from the webpage and return it in a valid JSON structure. Each field must be included even if the value is null.  Required JSON structure: {   \"name\": \"string - the name or title of the property\",   \"price\": \"string - the listed price of the property, including currency\",   \"expenses\": \"string - monthly expenses or HOA fees if available, otherwise null\",   \"description\": \"string - a detailed description of the property\",   \"photo_links\": [\"array of URLs to all photos of the property in the modal gallery\"],   \"ambientes\": \"string or number - number of rooms or living spaces\",   \"prestaciones\": \"array of strings - list of amenities, features, or services included\" }"
       },
       "type": "n8n-nodes-scrapegraphai.scrapegraphAi",
       "typeVersion": 1,
       "position": [
-        -208,
-        64
+        -896,
+        192
       ],
-      "id": "ddffa86a-af2a-4693-ad17-a990909d97ac",
+      "id": "6b042d13-10a0-4c55-887d-026cb5d08685",
       "name": "Autonomously extract live data from any website perfect for e commerce job boards lead capture and more",
       "credentials": {
         "scrapegraphAIApi": {
-          "id": "CB3koxQxqLUmy2De",
+          "id": "hyYSVw26x26Go8WV",
           "name": "ScrapegraphAI account"
         }
       }
@@ -66,10 +67,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -448,
-        272
+        -1168,
+        -400
       ],
-      "id": "fe79e909-cfb0-4b49-9bbb-04545112ec03",
+      "id": "edc74753-93c2-4b9a-a0cc-6c6ff50cc061",
       "name": "Sticky Note1"
     },
     {
@@ -81,30 +82,224 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1024,
-        -256
+        -1792,
+        -336
       ],
-      "id": "0c434391-1e31-4c9e-807f-3ba2040f1a94",
+      "id": "a535a976-88e8-4145-a8b0-4574ae5318d2",
       "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "jsCode": "return { mensaje: 'hola'}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1504,
+        16
+      ],
+      "id": "8f5f01a4-057e-4ab7-8308-119cb5bf8e14",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/webhook/whatsapp",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1760,
+        384
+      ],
+      "id": "5f6b3aac-1a77-423e-9dd6-e1eccf923b0e",
+      "name": "Webhook",
+      "webhookId": "eca917b0-50eb-42a9-befa-26759b069c9f"
+    },
+    {
+      "parameters": {
+        "jsCode": "const message = $input.first().json.body.body; // mensaje recibido\nconst numero = $input.first().json.body.WaId; // mensaje recibido\n\nconst lines = message.split(\"\\n\");\n\nreturn [\n  {\n    json: {\n      nombre: lines[0].split(\":\")[1].trim(),\n      email: lines[1].split(\":\")[1].trim(),\n      edad: parseInt(lines[2].split(\":\")[1].trim()),\n      ciudad: lines[3].split(\":\")[1].trim(),\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1456,
+        384
+      ],
+      "id": "04272107-1389-49a1-99bd-30290631cf88",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "from": "202020",
+        "to": "=+5492235677103",
+        "toWhatsapp": true,
+        "message": "Hola Fede",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        -896,
+        -160
+      ],
+      "id": "d92ced66-b9e9-4917-bcb2-c1895d75e114",
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "id": "EUcQLQPhutJZvHma",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "getAll",
+        "projectId": "scrapiliaria",
+        "collection": "users"
+      },
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        -896,
+        400
+      ],
+      "id": "3f169fdf-d83e-4ed0-bdfb-1c02fd10d07d",
+      "name": "Get many documents",
+      "credentials": {
+        "googleApi": {
+          "id": "D8XLccZcefBoZ0GA",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "upsert",
+        "projectId": "scrapiliaria",
+        "collection": "users"
+      },
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        -896,
+        16
+      ],
+      "id": "1268b6c0-2054-4ee1-9b2b-395c56cec13c",
+      "name": "Create or update a document",
+      "credentials": {
+        "googleApi": {
+          "id": "D8XLccZcefBoZ0GA",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "expression",
+        "output": "={{$json[\"mensaje\"]}}"
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1264,
+        48
+      ],
+      "id": "84f9fe41-692c-4525-843c-d784a5eebe29",
+      "name": "Switch"
     }
   ],
+  "pinData": {},
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
         [
           {
-            "node": "Code in JavaScript",
+            "node": "Code in JavaScript1",
             "type": "main",
             "index": 0
           }
         ]
       ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many documents": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create or update a document",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Autonomously extract live data from any website perfect for e commerce job boards lead capture and more",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get many documents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an SMS/MMS/WhatsApp message": {
+      "main": [
+        []
+      ]
     }
   },
-  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "42fb4ccf-91e2-41c5-8d28-13e8260a16e6",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "2395d18ea6cca1f414369f37a55b1d2e41d6bac4be31fac5e69f1637ae78b9b7"
+    "instanceId": "ca82678540ad40011fbdbf0140a2208e981b91953294945b6921fdc74faadcc9"
   },
-  "name": "workflow1"
+  "id": "8cYByeyeClbCipVl",
+  "tags": []
 }
